@@ -3,6 +3,8 @@ services:
     container_name: controller
     restart: always
     image: wingst-automation
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: Dockerfile
