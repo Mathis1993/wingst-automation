@@ -10,7 +10,7 @@ from smartthings.commands import Command
 BASE_URL = "https://api.smartthings.com/v1/"
 DEVICES = "devices"
 CAPABILITIES = "capabilities"
-COMMAND = "command"
+COMMAND = "commands"
 
 
 class Api:
@@ -26,7 +26,7 @@ class Api:
 
     def post(self, url: str, payload: dict):
         data = json.dumps(payload)
-        return requests.get(url=url, headers=self.headers, data=data)
+        return requests.post(url=url, headers=self.headers, data=data)
 
     def devices(self):
         url = f"{BASE_URL}{DEVICES}"
