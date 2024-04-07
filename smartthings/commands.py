@@ -1,6 +1,6 @@
 from smartthings.exceptions import CommandModuleException
 
-FLOW_TEMPERATURE_COMMAND = "thermostatCoolingSetpoint"
+FLOW_TEMPERATURE_COMMAND = "setCoolingSetpoint"
 
 
 class Command:
