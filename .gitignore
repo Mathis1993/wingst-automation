@@ -1,0 +1,30 @@
+# OSX #
+.DS_Store
+
+# Byte-compiled / optimized / DLL files #
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django #
+*.log
+db.sqlite3
+media
+
+# Virtual environment
+.venv
+
+# Docker
+.docker
+
+# PyCharm
+.idea
+
+# Environment
+.env
+
+# pip-tools
+wingst_automation.egg-info/
+
+# pytest
+.pytest_cache/

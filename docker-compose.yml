@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  controller:
+    image: wingst-automation
+    build:
+      context: .
+      dockerfile: Dockerfile
