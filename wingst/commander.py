@@ -20,6 +20,7 @@ class Commander:
             track_last_n_measurements=config.track_last_n_power_measurements
         )
         self.heat_pump = HeatPump()
+        # ToDo(ME-07.04.24): Check actual flow temperature of heat pump and if it is turned on
         self.power_production_mode = False
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
