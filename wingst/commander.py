@@ -87,6 +87,7 @@ class Commander:
                 exit = not self.heat_pump.online()
                 if exit:
                     self.logger.info("Heat pump is offline. Exiting power measurement.")
+                    self.power_meter.measurements_balance.clear()
                 return exit
             return False
 
