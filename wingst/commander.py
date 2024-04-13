@@ -29,10 +29,11 @@ class Commander:
         self.logger.setLevel(logging.INFO)
 
     def command_heatpump(self):
+        self._command_heatpump()
         while True:
-            self._command_heatpump()
+            self._command_heatpump(register_callbacks=False)
 
-    def _command_heatpump(self):
+    def _command_heatpump(self, register_callbacks: bool = True):
         online = self.heat_pump.online()
         while not online:
             self.logger.info("Heat pump is offline. Waiting for 15 minutes.")
@@ -92,7 +93,9 @@ class Commander:
             return False
 
         self.power_meter.start_measuring(
-            measurement_callback=heatpump_power_measurement_callback, exit_condition=exit_condition
+            measurement_callback=heatpump_power_measurement_callback,
+            exit_condition=exit_condition,
+            register_callbacks=register_callbacks,
         )
 
     def restore_default_flow_temperature(self):

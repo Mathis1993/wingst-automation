@@ -17,14 +17,20 @@ class PowerMeter:
         self.track_last_n_measurements = track_last_n_measurements
         self.measurements_balance = MovingAverage(size=track_last_n_measurements)
 
-    def start_measuring(self, measurement_callback: Callable, exit_condition: Callable):
+    def start_measuring(
+        self,
+        measurement_callback: Callable,
+        exit_condition: Callable,
+        register_callbacks: bool = True,
+    ):
         async def append_measurement(data):
             consumption = data.power
             production = data.power_production
             self.measurements_balance.append(int(consumption - production))
 
-        self.callback_registrator(append_measurement)
-        self.callback_registrator(measurement_callback)
+        if register_callbacks:
+            self.callback_registrator(append_measurement)
+            self.callback_registrator(measurement_callback)
 
         self.home.start_live_feed(user_agent="UserAgent/0.0.1", exit_condition=exit_condition)
 
