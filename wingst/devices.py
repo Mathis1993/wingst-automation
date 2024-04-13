@@ -17,7 +17,7 @@ class PowerMeter:
         self.track_last_n_measurements = track_last_n_measurements
         self.measurements_balance = MovingAverage(size=track_last_n_measurements)
 
-    def start_measuring(self, measurement_callback: Callable):
+    def start_measuring(self, measurement_callback: Callable, exit_condition: Callable):
         async def append_measurement(data):
             consumption = data.power
             production = data.power_production
@@ -26,7 +26,7 @@ class PowerMeter:
         self.callback_registrator(append_measurement)
         self.callback_registrator(measurement_callback)
 
-        self.home.start_live_feed(user_agent="UserAgent/0.0.1")
+        self.home.start_live_feed(user_agent="UserAgent/0.0.1", exit_condition=exit_condition)
 
     def moving_average_power_balance(self):
         return self.measurements_balance.average()
@@ -43,5 +43,9 @@ class HeatPump(Device):
     def set_flow_temperature(self, temperature: int):
         command = self.flow_temperature_capability.set_flow_temperature(
             temperature, module=settings.HEAT_PUMP_MODULE_HEATING
+        )
+        self.execute_command(command)
+        command = self.flow_temperature_capability.set_flow_temperature(
+            temperature, module=settings.HEAT_PUMP_MODULE_WATER
         )
         self.execute_command(command)
