@@ -17,3 +17,7 @@ class MovingAverage:
         if len(self.current_values) != self.size:
             return None
         return int(self.sum / len(self.current_values))
+
+    def clear(self):
+        self.current_values.clear()
+        self.sum = 0
