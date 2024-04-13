@@ -6,7 +6,7 @@ def run():
     """
     Accumulate a moving average of power balance (consumption - production) values.
     If the moving average is below a threshold, increase the heat pump flow temperature for heating
-    (radiators) in order to use the produced power.
+    (radiators and water for e.g. showering) in order to use the produced power.
     If the moving average is above a threshold, decrease the heat pump flow temperature again.
     """
     config = Config(
