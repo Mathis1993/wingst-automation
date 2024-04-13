@@ -11,6 +11,7 @@ BASE_URL = "https://api.smartthings.com/v1/"
 DEVICES = "devices"
 CAPABILITIES = "capabilities"
 COMMAND = "commands"
+STATUS = "status"
 
 
 class Api:
@@ -30,6 +31,11 @@ class Api:
 
     def devices(self):
         url = f"{BASE_URL}{DEVICES}"
+        response = self.get(url)
+        return self.process_response(response)
+
+    def device_status(self, device_id: str):
+        url = f"{BASE_URL}{DEVICES}/{device_id}/{STATUS}"
         response = self.get(url)
         return self.process_response(response)
 

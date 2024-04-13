@@ -9,3 +9,7 @@ class Device:
 
     def execute_command(self, command: Command):
         return self.api.command(self.device_id, command)
+
+    def online(self):
+        status = self.api.device_status(self.device_id)
+        return status["components"]["main"]["switch"]["switch"]["value"] == "on"
