@@ -12,6 +12,7 @@ class Device:
 
     def online(self):
         status = self.api.device_status(self.device_id)
+        # ToDo(ME-14.04.24): This is heatpump specific. Refactor.
         return (
             status["components"]["main"]["switch"]["switch"]["value"] == "on"
             or status["components"]["INDOOR"]["switch"]["switch"]["value"] == "on"
