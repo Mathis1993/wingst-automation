@@ -12,4 +12,7 @@ class Device:
 
     def online(self):
         status = self.api.device_status(self.device_id)
-        return status["components"]["main"]["switch"]["switch"]["value"] == "on"
+        return (
+            status["components"]["main"]["switch"]["switch"]["value"] == "on"
+            or status["components"]["INDOOR"]["switch"]["switch"]["value"] == "on"
+        )
