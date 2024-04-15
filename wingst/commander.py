@@ -76,7 +76,7 @@ class Commander:
                 self.logger.info(
                     f"Power consumption at {moving_average_balance},"
                     f" threshold exceeded. Setting heat pump flow temperature to "
-                    f"{self.config.power_consumption_threshold}°C."
+                    f"{self.config.heat_pump_flow_temperature_power_consumption}°C."
                 )
                 self.heat_pump.set_flow_temperature(
                     self.config.heat_pump_flow_temperature_power_consumption
