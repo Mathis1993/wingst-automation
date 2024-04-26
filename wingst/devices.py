@@ -1,6 +1,9 @@
+import logging
 from typing import Callable
 
 import tibber
+from gql.transport.exceptions import TransportClosed
+from websockets.exceptions import ConnectionClosedError
 
 from smartthings.api import Api
 from smartthings.capabilities import FlowTemperatureCapability
@@ -16,6 +19,7 @@ class PowerMeter:
         self.callback_registrator = self.home.event("live_measurement")
         self.track_last_n_measurements = track_last_n_measurements
         self.measurements_balance = MovingAverage(size=track_last_n_measurements)
+        self.logger = logging.getLogger(__name__)
 
     def start_measuring(
         self,
@@ -32,7 +36,14 @@ class PowerMeter:
             self.callback_registrator(append_measurement)
             self.callback_registrator(measurement_callback)
 
-        self.home.start_live_feed(user_agent="UserAgent/0.0.1", exit_condition=exit_condition)
+        while True:
+            try:
+                self.home.start_live_feed(
+                    user_agent="UserAgent/0.0.1", exit_condition=exit_condition
+                )
+                return
+            except (ConnectionClosedError, TransportClosed, TypeError) as e:
+                self.logger.error(f"Error: {e}")
 
     def moving_average_power_balance(self):
         return self.measurements_balance.average()
