@@ -41,7 +41,10 @@ class PowerMeter:
             try:
                 self.logger.info("Starting live feed.")
                 self.home.start_live_feed(
-                    user_agent="UserAgent/0.0.1", exit_condition=exit_condition
+                    user_agent="UserAgent/0.0.1",
+                    exit_condition=exit_condition,
+                    retries=10,
+                    retry_interval=10,
                 )
                 return
             except (ConnectionClosedError, TransportClosed, TypeError) as e:
