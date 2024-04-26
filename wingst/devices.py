@@ -20,6 +20,7 @@ class PowerMeter:
         self.track_last_n_measurements = track_last_n_measurements
         self.measurements_balance = MovingAverage(size=track_last_n_measurements)
         self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.INFO)
 
     def start_measuring(
         self,
@@ -38,6 +39,7 @@ class PowerMeter:
 
         while True:
             try:
+                self.logger.info("Starting live feed.")
                 self.home.start_live_feed(
                     user_agent="UserAgent/0.0.1", exit_condition=exit_condition
                 )
