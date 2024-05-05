@@ -67,7 +67,9 @@ class HeatPump(Device):
             temperature, module=settings.HEAT_PUMP_MODULE_HEATING
         )
         self.execute_command(command)
-        command = self.flow_temperature_capability.set_flow_temperature(
-            temperature, module=settings.HEAT_PUMP_MODULE_WATER
-        )
-        self.execute_command(command)
+        # ToDo(ME-05.05.24): Exclude the warm water module until there is a force override available
+        #  for the user so that they can decide to override the flow teperature for warm water
+        # command = self.flow_temperature_capability.set_flow_temperature(
+        #     temperature, module=settings.HEAT_PUMP_MODULE_WATER
+        # )
+        # self.execute_command(command)
