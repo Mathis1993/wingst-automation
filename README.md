@@ -6,6 +6,10 @@ When a certain amount of power is produced, the heat pump should increase the fl
 the heating system (radiators).
 When the power production drops, the flow temperature should be decreased again.
 
+## Prerequisites
+- Samsung heat pump controllable via the smartthings API
+- Solar power production tracked via the Tibber API
+
 ## Structure
 The repository is structured as follows:
 - `smartthings`: Contains a wrapper around the SmartThings API to control the heat pump
